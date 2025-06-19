@@ -1,9 +1,9 @@
+from picamera2 import Picamera2
 import tensorflow as tf
 import cv2
 import numpy as np
 import time
 from datetime import datetime
-from picamera2 import Picamera2
 
 def classify_egg_size(area):
     if area < 2000:
@@ -30,19 +30,13 @@ def preprocess_image(image):
     image = np.expand_dims(image, axis=0)
     return image
 
-def create_black_background(frame):
-    height, width = frame.shape[:2]
-    black_bg = np.zeros((height, width, 3), dtype=np.uint8)
-    black_bg[:height//2] = frame[:height//2]
-    return black_bg
-
 def simulate_candling(frame):
     height, width = frame.shape[:2]
     candled = frame.copy()
     candled[height//2:] = cv2.add(candled[height//2:], 50)
     return candled
 
-def resize_for_display(img, scale=0.5):
+def resize_for_display(img, scale=0.75):
     h, w = img.shape[:2]
     return cv2.resize(img, (int(w*scale), int(h*scale)), interpolation=cv2.INTER_AREA)
 
@@ -67,7 +61,7 @@ def main():
     detection_in_progress = False
     while True:
         frame = picam2.capture_array()
-        display_frame = create_black_background(frame)
+        display_frame = frame.copy()  # Show the full frame, no blacked-out bottom
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         contrast = cv2.convertScaleAbs(gray, alpha=2, beta=0)
         light_blur = cv2.GaussianBlur(contrast, (5, 5), 0.8)
@@ -115,7 +109,7 @@ def main():
                 color = (0, 255, 0) if prediction > 0.5 else (0, 0, 255)
                 cv2.putText(result_frame, f"{current_egg_data['quality']} (Confidence: {prediction:.2f})",
                             (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
-                current_egg_data["quality_image"] = resize_for_display(result_frame, scale=0.5)
+                current_egg_data["quality_image"] = resize_for_display(result_frame, scale=0.75)
                 print(f"\nEgg Detected at {current_egg_data['timestamp']}")
                 print(f"Size: {current_egg_data['size']}")
                 print(f"Quality: {current_egg_data['quality']} (Confidence: {prediction:.2f})")
@@ -125,10 +119,10 @@ def main():
         elif detection_in_progress and not egg_detected:
             detection_in_progress = False
             current_egg_data = {"size": None, "quality": None, "timestamp": None, "quality_image": None}
-        display_frame_small = resize_for_display(display_frame, scale=0.5)
-        cleaned_small = resize_for_display(cleaned, scale=0.5)
-        cv2.imshow("Egg Detection System", display_frame_small)
-        cv2.imshow("Edge Detection", cleaned_small)
+        display_frame_big = resize_for_display(display_frame, scale=0.75)
+        cleaned_big = resize_for_display(cleaned, scale=0.75)
+        cv2.imshow("Egg Detection System", display_frame_big)
+        cv2.imshow("Edge Detection", cleaned_big)
         if current_egg_data["quality_image"] is not None:
             cv2.imshow("Quality Classification", current_egg_data["quality_image"])
             cv2.waitKey(3000)
