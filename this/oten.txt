@@ -36,3 +36,5 @@ def get_eggs():
     # Return eggs sorted by newest first
     eggs = list(collection.find({}, {"_id": 0}).sort("timestamp", -1))
     return {"eggs": eggs}
+// eggs = list(collection.find({}, {"_id": 0}))
+sudo systemctl status mongod
