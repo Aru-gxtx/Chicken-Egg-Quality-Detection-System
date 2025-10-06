@@ -1,0 +1,38 @@
+from fastapi import FastAPI, UploadFile, Form
+from fastapi.staticfiles import StaticFiles
+from pymongo import MongoClient
+from datetime import datetime
+import shutil
+
+app = FastAPI()
+
+# Connect MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client["egg_database"]
+collection = db["eggs"]
+
+# Mount images directory so Flutter can access
+app.mount("/images", StaticFiles(directory="images"), name="images")
+
+@app.post("/egg")
+async def upload_egg(image: UploadFile, size: str = Form(...), grade: str = Form(...)):
+    # Save image file
+    filepath = f"images/{image.filename}"
+    with open(filepath, "wb") as buffer:
+        shutil.copyfileobj(image.file, buffer)
+    
+    # Save record to DB
+    record = {
+        "image": image.filename,
+        "size": size,
+        "grade": grade,
+        "timestamp": datetime.now().isoformat()
+    }
+    collection.insert_one(record)
+    return {"message": "Egg data saved!"}
+
+@app.get("/eggs")
+def get_eggs():
+    # Return eggs sorted by newest first
+    eggs = list(collection.find({}, {"_id": 0}).sort("timestamp", -1))
+    return {"eggs": eggs}
