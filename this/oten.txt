@@ -47,32 +47,29 @@ sudo apt install -y mongodb
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-import json
-import os
+import os, json
 
 app = FastAPI()
 
-# 📂 Path to your egg results folder
-EGG_FOLDER = "/home/pi/Documents/eggs"
-JSON_PATH = os.path.join(EGG_FOLDER, "img_results.json")
+# Folder that contains your egg data
+EGG_FOLDER = "/home/group4PI/Documents/eggs"
+JSON_FILE = os.path.join(EGG_FOLDER, "img_results.json")
 
-# 🖼️ Serve the egg images
+# Serve images from this folder
 app.mount("/images", StaticFiles(directory=EGG_FOLDER), name="images")
 
-# 🥚 Endpoint to return egg data
 @app.get("/eggs")
 def get_eggs():
-    if not os.path.exists(JSON_PATH):
-        return JSONResponse(content={"eggs": []})
-    with open(JSON_PATH, "r") as f:
+    if not os.path.exists(JSON_FILE):
+        return {"eggs": []}
+
+    with open(JSON_FILE, "r") as f:
         data = json.load(f)
-    # Your JSON file looks like a list of eggs
+
+    # Modify each image path to a URL that Flutter can access
+    for egg in data:
+        image_filename = os.path.basename(egg["image_path"])
+        egg["image_url"] = f"http://10.232.51.78:8000/images/{image_filename}"
+
     return {"eggs": data}
 
-# Optional: serve a single image
-@app.get("/images/{image_name}")
-def get_image(image_name: str):
-    image_path = os.path.join(EGG_FOLDER, image_name)
-    if os.path.exists(image_path):
-        return FileResponse(image_path)
-    return JSONResponse(content={"error": "Image not found"}, status_code=404)
