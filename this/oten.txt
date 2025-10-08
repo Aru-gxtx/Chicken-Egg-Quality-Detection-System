@@ -68,31 +68,50 @@ INFO:     10.227.128.97:60426 - "GET /eggs HTTP/1.1" 200 OK
 
 
 from fastapi import FastAPI
-from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-import os, json
+from fastapi.middleware.cors import CORSMiddleware
+import json
+import os
 
 app = FastAPI()
 
-# Folder that contains your egg data
+# Allow Flutter and other clients to connect
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # allow all devices
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Path to the folder where JSON and images are stored
 EGG_FOLDER = "/home/group4PI/Documents/eggs"
 JSON_FILE = os.path.join(EGG_FOLDER, "img_results.json")
 
-# Serve images from this folder
-app.mount("/images", StaticFiles(directory=EGG_FOLDER), name="images")
-
 @app.get("/eggs")
 def get_eggs():
+    """
+    Read the img_results.json file and return its content.
+    """
     if not os.path.exists(JSON_FILE):
         return {"eggs": []}
 
     with open(JSON_FILE, "r") as f:
         data = json.load(f)
 
-    # Modify each image path to a URL that Flutter can access
-    for egg in data:
-        image_filename = os.path.basename(egg["image_path"])
-        egg["image_url"] = f"http://10.232.51.78:8000/images/{image_filename}"
+    # Ensure the response always has the structure {"eggs": [...]}
+    if isinstance(data, list):
+        return {"eggs": data}
+    elif isinstance(data, dict) and "eggs" in data:
+        return data
+    else:
+        return {"eggs": [data]}
 
-    return {"eggs": data}
+# Serve egg images
+app.mount("/images", StaticFiles(directory=EGG_FOLDER), name="images")
+
+@app.get("/")
+def root():
+    return {"message": "Egg API is running! Visit /eggs to view data."}
+
 
