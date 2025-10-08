@@ -46,49 +46,33 @@ sudo apt install -y mongodb
 
 
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
 import json
 import os
 
 app = FastAPI()
 
-# Allow Flutter (different device) to access the API
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # for testing, allow all
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Path to your egg folder
+EGG_FOLDER = Path("/home/pi/Documents/eggs")
 
-# Path to your existing data
-EGG_JSON_PATH = "/home/group4PI/Documents/eggs/eggs.json"
-EGG_IMAGES_DIR = "/home/group4PI/Documents/eggs/"
-
-# Serve images from your egg folder
-app.mount("/images", StaticFiles(directory=EGG_IMAGES_DIR), name="images")
-
+# Serve static images (so Flutter can load them)
+app.mount("/images", StaticFiles(directory=EGG_FOLDER), name="images")
 
 @app.get("/eggs")
 def get_eggs():
-    """Read egg data from JSON file and return in Flutter-compatible format."""
-    if not os.path.exists(EGG_JSON_PATH):
-        return {"eggs": []}
+    json_path = EGG_FOLDER / "img_results.json"
+    if not json_path.exists():
+        return {"message": "No results file found"}
 
-    with open(EGG_JSON_PATH, "r") as f:
-        egg_data = json.load(f)
+    with open(json_path, "r") as f:
+        data = json.load(f)
+    
+    # If your JSON has relative filenames, add image URLs for Flutter
+    for egg in data:
+        if "image" in egg:
+            egg["image_url"] = f"http://<RASPI_IP>:8000/images/{egg['image']}"
+    
+    return {"eggs": data}
 
-    eggs = []
-    for e in egg_data:
-        # Map to Flutter’s expected fields
-        image_filename = os.path.basename(e["image_path"])
-        eggs.append({
-            "image": image_filename,
-            "grade": e["label"],       # label → grade
-            "size": e["size"],         # keep size
-            "confidence": e["confidence"],
-            "timestamp": e["timestamp"]
-        })
-
-    return {"eggs": eggs}
