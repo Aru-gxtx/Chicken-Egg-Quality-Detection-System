@@ -42,6 +42,29 @@ sudo apt update
 sudo apt install -y mongodb
 
 
+(venv) group4PI@group4PI:~/Documents/test $ uvicorn main:app --host 0.0.0.0 --port 8000
+INFO:     Started server process [12409]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     10.227.128.97:60311 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60311 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60311 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60311 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60311 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60311 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60329 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60329 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60329 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60329 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60345 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60405 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60405 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60405 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60405 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60405 - "GET /eggs HTTP/1.1" 200 OK
+INFO:     10.227.128.97:60426 - "GET /eggs HTTP/1.1" 200 OK
+
 
 
 from fastapi import FastAPI
