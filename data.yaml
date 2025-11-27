@@ -1,0 +1,5 @@
+train: /content/dataset_split/train
+val: /content/dataset_split/val
+test: /content/dataset_split/test
+nc: 4
+names: ['Inedible', 'B - Fair', 'A - Good', 'AA - Premium']
