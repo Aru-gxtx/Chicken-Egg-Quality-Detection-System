@@ -1,6 +1,6 @@
-# Chicken Egg Quality Detection Device Using Image Processing
+# Chicken Egg Quality Detection System
 
-![Egg UI Preview](README_assets/egg_preview.png)
+![Chicken Egg Quality Detection System UI Preview](README_assets/egg_preview.png)
 
 This repository contains the software implementation for the **Chicken Egg Quality Detection Device Using Image Processing for Efficient Rural Production** study.
 
@@ -26,7 +26,7 @@ To run the main detection program (`grand_final_setup.py`), the following hardwa
 
 ### Prerequisites
 
-* Python 3.x.x
+* Python 3.x
 * Virtual Environment (`venv`)
 * Flutter (for the dashboard)
 
@@ -34,8 +34,8 @@ To run the main detection program (`grand_final_setup.py`), the following hardwa
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/Aru-gxtx/Chicken-Egg-Quality-Detection-System.git](https://github.com/Aru-gxtx/Chicken-Egg-Quality-Detection-System.git)
-    cd Chicken-Egg-Quality-Detection-System
+    git clone [https://github.com/Aru-gxtx/your-repo-name.git](https://github.com/Aru-gxtx/your-repo-name.git)
+    cd your-repo-name
     ```
 
 2.  **Set up the Virtual Environment:**
@@ -56,7 +56,7 @@ To run the main detection program (`grand_final_setup.py`), the following hardwa
 
 ## Usage
 
-### 1. Running the Main System (`grand_final_setup.py`)
+### 1. Running the Main System (Grand Final Setup)
 
 The `grand_final_setup.py` is the core script that integrates the camera, the detection model, and the hardware control.
 
@@ -65,9 +65,9 @@ The `grand_final_setup.py` is the core script that integrates the camera, the de
 python grand_final_setup.py
 ```
 
-**Important Notes:**
-* The system requires all hardware components (Camera, ESP32 via USB0) to be connected. The script will fail if these conditions are not met.
-* **Plug-and-Play Capability:** The system is designed to run automatically when the Pi receives power. To enable this feature, you must manually configure your Raspberry Pi to execute the script on boot (e.g., via `systemd` or `rc.local`).
+_**Important Notes:**_
+* _The system requires all hardware components (Camera, ESP32 via USB0) to be connected. The script will fail if these conditions are not met._
+* _**Plug-and-Play Capability:** The system is designed to run automatically when the Pi receives power. To enable this feature, you must manually configure your Raspberry Pi to execute the script on boot (e.g., via `systemd` or `rc.local`)._
 
 ### 2. Model Training
 
@@ -82,6 +82,11 @@ The repository includes a pre-trained model located in `train/weights/best.pt`. 
     ```bash
     python data.yaml
     ```
+4.  **Train the Model:** Execute the following command in your terminal (bash) to start training:
+    ```bash
+    yolo classify train data=data.yaml model=yolov8n.pt epochs=50 imgsz=640
+    ```
+    * Once finished, retrieve your results (weights and metrics) from the newly created `train` folder.
 
 ### 3. Dashboard Application
 
@@ -92,6 +97,7 @@ For the dashboard to receive data manually, you must first run the server API. T
 ```bash
 python Uvicorn.py
 ```
+> _**Note:** Ensure all necessary server dependencies are installed before running this script. If you encounter errors, please check that libraries such as `uvicorn` and `fastapi` are installed or refer to `requirements.txt`._
 
 **Running the Dashboard:**
 * **Quick Start:** Use the pre-compiled `.exe` file available in the [Releases Page](#).
@@ -145,4 +151,4 @@ Upload `servo_controls.cpp` to your ESP32.
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-**Note:** This project is part of an academic study. Please contact the authors for usage permissions regarding the datasets and specific implementation details.
+_**Note:** This project is part of an academic study. Please contact the authors for usage permissions regarding the datasets and specific implementation details._
