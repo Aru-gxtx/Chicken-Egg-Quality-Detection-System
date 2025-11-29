@@ -128,10 +128,12 @@ Upload `servo_controls.cpp` to your ESP32.
 **Testing Scripts:**
 1.  **Angle Testing:** Use `simple_listener.py` along with `simple_controls.cpp`. This allows you to manually input angles to verify the servo moves to the correct position.
 2.  **Communication Testing:** Use `servo_listener.py` to test data transmission from the Pi to the ESP32.
-    * *Note:* Ensure you specify the accurate COM port.
+    * _*Note:* Ensure you specify the accurate COM port._
 
 ---
 
 ## License
 
-This project is part of an academic study. Please contact the authors for usage permissions regarding the datasets and specific implementation details.
+Distributed under the MIT License. See `LICENSE` for more information.
+
+_**Note:** This project is part of an academic study. Please contact the authors for usage permissions regarding the datasets and specific implementation details._
