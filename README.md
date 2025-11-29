@@ -1,4 +1,6 @@
-# Chicken Egg Quality Detection Device Using Image Processing
+# Chicken Egg Quality Detection System
+
+![Egg Quality Detection System Preview](README_assets/egg_preview.png)
 
 This repository contains the software implementation for the **Chicken Egg Quality Detection Device Using Image Processing for Efficient Rural Production** study.
 
