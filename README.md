@@ -1,6 +1,4 @@
-# Chicken Egg Quality Detection System
-
-![Egg Quality Detection System Preview](README_assets/egg_preview.png)
+# Chicken Egg Quality Detection Device Using Image Processing
 
 This repository contains the software implementation for the **Chicken Egg Quality Detection Device Using Image Processing for Efficient Rural Production** study.
 
@@ -34,8 +32,8 @@ To run the main detection program (`grand_final_setup.py`), the following hardwa
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/Aru-gxtx/your-repo-name.git
-    cd your-repo-name
+    git clone [https://github.com/Aru-gxtx/Chicken-Egg-Quality-Detection-System.git](https://github.com/Aru-gxtx/Chicken-Egg-Quality-Detection-System.git)
+    cd Chicken-Egg-Quality-Detection-System
     ```
 
 2.  **Set up the Virtual Environment:**
@@ -56,7 +54,7 @@ To run the main detection program (`grand_final_setup.py`), the following hardwa
 
 ## Usage
 
-### 1. Running the Main System (Grand Final Setup)
+### 1. Running the Main System (`grand_final_setup.py`)
 
 The `grand_final_setup.py` is the core script that integrates the camera, the detection model, and the hardware control.
 
@@ -85,8 +83,15 @@ The repository includes a pre-trained model located in `train/weights/best.pt`. 
 
 ### 3. Dashboard Application
 
-The dashboard is built with Flutter and is used for analytics and monitoring.
+The dashboard is built with Flutter and allows for real-time monitoring and analytics.
 
+**Prerequisite (Backend API):**
+For the dashboard to receive data manually, you must first run the server API. This acts as the bridge between the detection system and the dashboard.
+```bash
+python Uvicorn.py
+```
+
+**Running the Dashboard:**
 * **Quick Start:** Use the pre-compiled `.exe` file available in the [Releases Page](#).
 * **For Developers (Source Code):**
     1.  Navigate to the `dashboardegg` folder.
@@ -138,4 +143,4 @@ Upload `servo_controls.cpp` to your ESP32.
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-_**Note:** This project is part of an academic study. Please contact the authors for usage permissions regarding the datasets and specific implementation details._
+**Note:** This project is part of an academic study. Please contact the authors for usage permissions regarding the datasets and specific implementation details.
