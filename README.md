@@ -26,7 +26,7 @@ To run the main detection program (`grand_final_setup.py`), the following hardwa
 
 ### Prerequisites
 
-* Python 3.x
+* Python 3.x.x
 * Virtual Environment (`venv`)
 * Flutter (for the dashboard)
 
