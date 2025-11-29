@@ -18,7 +18,7 @@ app.add_middleware(
 )
 
 # 📦 MongoDB Atlas connection
-client = MongoClient("mongodb+srv://egg_user:1qaz@egg0.tzjyvga.mongodb.net/?appName=Egg0")
+client = MongoClient("mongodb+srv://egg_user:pass_should_!_be_shared@egg0.tzjyvga.mongodb.net/?appName=Egg0")
 db = client["EggDB"]
 eggs_collection = db["eggs"]
 
