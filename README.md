@@ -7,7 +7,7 @@ This a the repository for everything needed in the Chicken Egg Quality Detection
 First, for the model, you could use the already trained model by us via the train folder, weights, best.pt as its default. But if you want to recreate the model creation, you should:
 1. provide your datasets images with annotation at the specified datasets folder, images and labels (for annotation) are divided into different figures. Make sure the annotated values are already separated into each classes (e.g. AA, A, B, Inedible (the default)).
 2. use datasets_separator.py program to separate the datasets into 3 parts, train, val, and test. This is for better model output and to remove the risks of overfitting.
-3. run the data.yaml program so that it will classify the annotated value for each class.
+3. run the ```data.yaml``` program so that it will classify the annotated value for each class.
 
 For the egg quality detection on the other hand, the ```grand_final_setup.py``` is the overall Chicken Egg Quality Detection Device Using Image Processing for Efficient Rural Production process. To run this, you would need:
 1. control unit, in our case, we use Raspberry Pi 4 Model B but any is okay. The ```grand_final_setup.py``` should be seen here.
