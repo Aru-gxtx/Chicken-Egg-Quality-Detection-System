@@ -4,7 +4,7 @@
 
 This repository contains the software implementation for the **Chicken Egg Quality Detection Device Using Image Processing for Efficient Rural Production** study.
 
-**Authors:** Aru-gxtx (Matthew Arni Bendo) and RafaelAntonioUy (Rafael Antonio E. Uy).
+**Authors:** @Aru-gxtx (Matthew Arni Bendo) and @RafaelAntonioUy (Rafael Antonio E. Uy).
 
 > _**Note:** This repository covers only the **software** aspect of the study. To replicate the full system, specific hardware components (listed below) are required. While manual replication is possible, the system is designed for automation._
 
