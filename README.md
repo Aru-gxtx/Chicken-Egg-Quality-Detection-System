@@ -2,9 +2,32 @@
 
 ![Chicken Egg Quality Detection System UI Preview](README_assets/egg_preview.png)
 
-This repository contains the software implementation for the **Chicken Egg Quality Detection Device Using Image Processing for Efficient Rural Production** study.
+This repository contains the software implementation for the **Chicken Egg Quality Detection Device Using Image Processing for Rural Production** study.
 
-**Authors:** @Aru-gxtx (Matthew Arni Bendo) and @RafaelAntonioUy (Rafael Antonio E. Uy).
+<p align="center">
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  </a>
+  <a href="https://flutter.dev/">
+    <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
+  </a>
+  <a href="https://www.raspberrypi.com/">
+    <img src="https://img.shields.io/badge/Raspberry%20Pi-A22846?style=for-the-badge&logo=raspberrypi&logoColor=white" alt="Raspberry Pi">
+  </a>
+  <a href="https://www.espressif.com/">
+    <img src="https://img.shields.io/badge/ESP32-323232?style=for-the-badge&logo=espressif&logoColor=white" alt="ESP32">
+  </a>
+  <a href="https://github.com/ultralytics/ultralytics">
+    <img src="https://img.shields.io/badge/YOLOv8-1E90FF?style=for-the-badge&logo=opencv&logoColor=white" alt="YOLOv8">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License: MIT">
+  </a>
+</p>
+
+<p align="center">
+  <strong>Authors:</strong> <a href="https://github.com/Aru-gxtx">@Aru-gxtx</a> (Matthew Arni Bendo) and <a href="https://github.com/RafaelAntonioUy">@RafaelAntonioUy</a> (Rafael Antonio E. Uy).
+</p>
 
 > _**Note:** This repository covers only the **software** aspect of the study. To replicate the full system, specific hardware components (listed below) are required. While manual replication is possible, the system is designed for automation._
 
@@ -34,7 +57,7 @@ To run the main detection program (`grand_final_setup.py`), the following hardwa
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/Aru-gxtx/your-repo-name.git](https://github.com/Aru-gxtx/your-repo-name.git)
+    git clone https://github.com/Aru-gxtx/your-repo-name.git
     cd your-repo-name
     ```
 
